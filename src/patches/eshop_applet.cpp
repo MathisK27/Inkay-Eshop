@@ -61,19 +61,19 @@ DECL_FUNCTION(int, FSOpenFile_eShop, FSClient *client, FSCmdBlock *block, char *
         //below is a hacky (yet functional!) way to get Inkay to redirect URLs from the Miiverse applet
         //we do it when loading this file since it should only load once, preventing massive lag spikes as it searches all of MEM2 xD
 
-        DEBUG_FUNCTION_LINE("Inkay: hewwo eShop!\n");
+        DEBUG_FUNCTION_LINE("Inkay-GetEshop: WHAT THE SIGMA ALREADY NOW!!!!!!!!!!!!!! eShop!\n");
 
         if (!replace(0x10000000, 0x10000000, wave_original, sizeof(wave_original), wave_new, sizeof(wave_new)))
-            DEBUG_FUNCTION_LINE("Inkay: We didn't find the url /)>~<(\\");
+            DEBUG_FUNCTION_LINE("Inkay-GetEshop: We didn't find the url /)>~<(\\");
 
         if (!replace(0x10000000, 0x10000000, whitelist_original, sizeof(whitelist_original), whitelist_new, sizeof(whitelist_new)))
-            DEBUG_FUNCTION_LINE("Inkay: We didn't find the whitelist /)>~<(\\");
+            DEBUG_FUNCTION_LINE("Inkay-GetEshop: We didn't find the whitelist /)>~<(\\");
 
     // Check for root CA file and take note of its handle
     } else if (strcmp("vol/content/browser/rootca.pem", path) == 0) {
         int ret = real_FSOpenFile_eShop(client, block, path, mode, handle, error);
         rootca_pem_handle = *handle;
-        DEBUG_FUNCTION_LINE("Inkay: Found eShop CA, replacing...");
+        DEBUG_FUNCTION_LINE("Inkay-GetEshop: Found eShop CA, replacing...");
         return ret;
     }
 
