@@ -49,19 +49,19 @@
 
 #include <gx2/surface.h>
 
-#define INKAY_VERSION "v2.5.0"
+#define INKAY_VERSION "v1.0"
 
 /**
     Mandatory plugin information.
     If not set correctly, the loader will refuse to use the plugin.
 **/
-WUPS_PLUGIN_NAME("Inkay");
-WUPS_PLUGIN_DESCRIPTION("Pretendo Network Patcher");
+WUPS_PLUGIN_NAME("GetEshop");
+WUPS_PLUGIN_DESCRIPTION("GetEshop Patcher");
 WUPS_PLUGIN_VERSION(INKAY_VERSION);
-WUPS_PLUGIN_AUTHOR("Pretendo contributors");
+WUPS_PLUGIN_AUTHOR("Pretendo contributors (modded by GetEshop)");
 WUPS_PLUGIN_LICENSE("ISC");
 
-WUPS_USE_STORAGE("inkay");
+WUPS_USE_STORAGE("geteshop-cdn");
 
 WUPS_USE_WUT_DEVOPTAB();
 
@@ -104,15 +104,15 @@ static const char *get_nintendo_network_message() {
     switch (get_system_language()) {
         case nn::swkbd::LanguageType::English:
         default:
-            return "Using Nintendo Network";
+            return "Using Nintendo Eshop";
         case nn::swkbd::LanguageType::Spanish:
-            return "Usando Nintendo Network";
+            return "Usando Nintendo Eshop";
         case nn::swkbd::LanguageType::French:
-            return "Sur Nintendo Network";
+            return "Sur Nintendo Eshop";
         case nn::swkbd::LanguageType::Italian:
-            return "Usando Nintendo Network";
+            return "Usando Nintendo Eshop";
         case nn::swkbd::LanguageType::German:
-            return "Nutze Nintendo Network";
+            return "Nutze Nintendo Eshop";
     }
 }
 
@@ -123,15 +123,15 @@ static const char *get_pretendo_message() {
     switch (get_system_language()) {
         case nn::swkbd::LanguageType::English:
         default:
-            return "Using Pretendo Network";
+            return "Using GetEshop";
         case nn::swkbd::LanguageType::Spanish:
-            return "Usando Pretendo Network";
+            return "Usando GetEshop";
         case nn::swkbd::LanguageType::French:
-            return "Sur Pretendo Network";
+            return "Sur GetEshop";
         case nn::swkbd::LanguageType::Italian:
-            return "Usando Pretendo Network";
+            return "Usando GetEshop";
         case nn::swkbd::LanguageType::German:
-            return "Nutze Pretendo Network";
+            return "Nutze GetEshop";
     }
 }
 
@@ -177,11 +177,11 @@ INITIALIZE_PLUGIN() {
         for (const auto &patch: url_patches) {
             write_string(patch.address, patch.url);
         }
-        DEBUG_FUNCTION_LINE_VERBOSE("Pretendo URL and NoSSL patches applied successfully.");
+        DEBUG_FUNCTION_LINE_VERBOSE("URL and NoSSL patches applied successfully.");
 
         ShowNotification(get_pretendo_message());
     } else {
-        DEBUG_FUNCTION_LINE_VERBOSE("Pretendo URL and NoSSL patches skipped.");
+        DEBUG_FUNCTION_LINE_VERBOSE("URL and NoSSL patches skipped.");
 
         ShowNotification(get_nintendo_network_message());
     }
@@ -205,7 +205,7 @@ DEINITIALIZE_PLUGIN() {
 }
 
 ON_APPLICATION_START() {
-    DEBUG_FUNCTION_LINE_VERBOSE("Inkay " INKAY_VERSION " starting up...\n");
+    DEBUG_FUNCTION_LINE_VERBOSE("GetEshop " INKAY_VERSION " starting up...\n");
 
     setup_olv_libs();
     matchmaking_notify_titleswitch();
