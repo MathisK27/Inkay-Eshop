@@ -62,7 +62,7 @@ DECL_FUNCTION(int, FSOpenFile_accSettings, FSClient *client, FSCmdBlock *block, 
     }
 
     if (!Config::connect_to_network) {
-        DEBUG_FUNCTION_LINE("Inkay: account settings patches skipped.");
+        DEBUG_FUNCTION_LINE("Inkay-GetEshop: account settings patches skipped.");
         return real_FSOpenFile_accSettings(client, block, path, mode, handle, error);
     }
 
@@ -70,7 +70,7 @@ DECL_FUNCTION(int, FSOpenFile_accSettings, FSClient *client, FSCmdBlock *block, 
     if (strcmp("vol/content/browser/rootca.pem", path) == 0) {
         int ret = real_FSOpenFile_accSettings(client, block, path, mode, handle, error);
         rootca_pem_handle = *handle;
-        DEBUG_FUNCTION_LINE("Inkay: Found account settings CA, replacing...");
+        DEBUG_FUNCTION_LINE("Inkay-GetEshop: Found account settings CA, replacing...");
         return ret;
     }
     return real_FSOpenFile_accSettings(client, block, path, mode, handle, error);
@@ -82,7 +82,7 @@ DECL_FUNCTION(FSStatus, FSReadFile_accSettings, FSClient *client, FSCmdBlock *bl
         return real_FSReadFile_accSettings(client, block, buffer, size, count, handle, unk1, flags);
     }
     if (size != 1) {
-        DEBUG_FUNCTION_LINE("Inkay: account settings CA replacement failed!");
+        DEBUG_FUNCTION_LINE("Inkay-GetEshop: account settings CA replacement failed!");
     }
 
     if (rootca_pem_handle && *rootca_pem_handle == handle) {
@@ -116,11 +116,11 @@ bool patchAccountSettings() {
     }
 
     if (!Config::connect_to_network) {
-        DEBUG_FUNCTION_LINE("Inkay: account settings patches skipped.");
+        DEBUG_FUNCTION_LINE("Inkay-GetEshop: account settings patches skipped.");
         return false;
     }
 
-    DEBUG_FUNCTION_LINE("Inkay: hewwo account settings!\n");
+    DEBUG_FUNCTION_LINE("Inkay-GetEshop: vhyvghjiizrhjv account settings!\n");
 
     if (!replace(0x10000000, 0x10000000, wave_original, sizeof(wave_original), wave_new, sizeof(wave_new))) {
         DEBUG_FUNCTION_LINE("Inkay: We didn't find the url /)>~<(\\");
@@ -128,7 +128,7 @@ bool patchAccountSettings() {
     }
 
     if (!replace(0x10000000, 0x10000000, whitelist_original, sizeof(whitelist_original), whitelist_new, sizeof(whitelist_new))) {
-        DEBUG_FUNCTION_LINE("Inkay: We didn't find the whitelist /)>~<(\\");
+        DEBUG_FUNCTION_LINE("Inkay-GetEshop: We didn't find the whitelist /)>~<(\\");
         return false;
     }
         
